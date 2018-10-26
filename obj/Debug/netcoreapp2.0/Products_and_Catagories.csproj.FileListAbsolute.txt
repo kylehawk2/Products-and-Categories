@@ -1,0 +1,11 @@
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\obj\Debug\netcoreapp2.0\Products_and_Catagories.csprojResolveAssemblyReference.cache
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\obj\Debug\netcoreapp2.0\Products_and_Catagories.csproj.CoreCompileInputs.cache
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\obj\Debug\netcoreapp2.0\Products_and_Catagories.AssemblyInfoInputs.cache
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\obj\Debug\netcoreapp2.0\Products_and_Catagories.AssemblyInfo.cs
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\bin\Debug\netcoreapp2.0\Products_and_Catagories.deps.json
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\bin\Debug\netcoreapp2.0\Products_and_Catagories.runtimeconfig.json
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\bin\Debug\netcoreapp2.0\Products_and_Catagories.runtimeconfig.dev.json
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\bin\Debug\netcoreapp2.0\Products_and_Catagories.dll
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\bin\Debug\netcoreapp2.0\Products_and_Catagories.pdb
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\obj\Debug\netcoreapp2.0\Products_and_Catagories.dll
+C:\Users\Kyle\Documents\C#-.NET\Products_and_Catagories\obj\Debug\netcoreapp2.0\Products_and_Catagories.pdb

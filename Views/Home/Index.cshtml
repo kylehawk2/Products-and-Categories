@@ -1,0 +1,52 @@
+﻿@using Products_and_Catagories.Models
+@model Products
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1><a href="">Products</a> | <a href="">Catagories</a></h1>
+    <form asp-action="" asp-controller="Home" method="POST">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input type="text" asp-for="Name" class="form-control">
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <input type="text" asp-for="Description" class="form-control">
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price">Price</label>
+            <input type="text" asp-for="Price" class="form-control">
+            <span asp-validation-for="Price"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    
+    <p>__________________________________________________________</p>
+    <table class="table col-sm-- mx-auto">
+        <thead>
+            <tr>
+                <th scope="col"><h1>Existing Products</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Product product in @ViewBag.allproducts)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

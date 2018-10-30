@@ -13,7 +13,7 @@ namespace Products_and_Catagories.Models
         public string Name {get;set;}
         [Required]
         [MinLength(5)]
-        public string Descripiton {get;set;}
+        public string Description {get;set;}
         [Required]
         public decimal Price {get;set;}
         public DateTime CreatedAt {get;set;}

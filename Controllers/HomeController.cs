@@ -24,11 +24,12 @@ namespace Products_and_Catagories.Controllers
             ViewBag.allproducts = AllProducts;
             return View();
         }
-
-        public IActionResult About()
+        [HttpGet]
+        [Route("/Catagory")]
+        public IActionResult Catagory()
         {
-            ViewData["Message"] = "Your application description page.";
-
+            List<Catagory> AllCatagories = dbContext.Catagories.ToList();
+            ViewBag.allcatagories = AllCatagories;
             return View();
         }
 

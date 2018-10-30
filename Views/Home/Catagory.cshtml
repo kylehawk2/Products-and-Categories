@@ -1,5 +1,5 @@
 ﻿@using Products_and_Catagories.Models
-@model Catagories
+@model Catagory
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,14 +10,34 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><a href="">Products</a> | <a href="">Catagories</a></h1>
-    <h2>New Catagory</h2>
+    <h1><a href="/">Products</a> | <a href="/Catagory">Categories</a></h1>
+    <h2>New Category</h2>
     <form asp-action="" asp-controller="Home" method="POST">
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input type="text" asp-for="Name" class="form-control">
             <span asp-validation-for="Name"></span>
         </div>
+        <div class="form-group">
+            <button type="submit">Create</button>
+        </div>
     </form>
+
+    <p>__________________________________________________</p>
+    <table class="table col-sm-- mx-auto">
+        <thead>
+            <tr>
+                <th scope="col"><h1>Existing Categories</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Catagory catagory in @ViewBag.allcatagories)
+            {
+                <tr>
+                    <td>@catagory.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </body>
 </html>

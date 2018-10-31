@@ -1,4 +1,4 @@
-﻿@model Association
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,32 +10,34 @@
 </head>
 <body>
     <h1><a href="/">Products</a> | <a href="/Catagory">Categories</a></h1>
-    <h2>@ViewBag.this_product.Name</h2>
+    <h2>@ViewBag.this_catagory.Name</h2>
     <table class="table col-sm-- mx-auto">
         <thead>
             <tr>
-                <th scope="col"><h3><u>Categories:</u></h3></th>
+                <th scope="col"><h3><u>Products:</u></h3></th>
             </tr>
         </thead>
         <tbody>
-            @foreach(Catagory catagory in @ViewBag.UsedCatagories)
+            @foreach(Product product in @ViewBag.UsedProducts)
             {
                 <tr>
-                    <td>@catagory.Name</td>
+                    <td>@product.Name</td>
                 </tr>
             }
         </tbody>
     </table>
     <form class="form-group" asp-action="" asp-controller="Home" method="POST">
         <div class="form-group">
-            <select asp-for="CatagoryId" class="form-control my-5">
-                @foreach(var item in ViewBag.UnusedCatagories)
+            <select asp-for="ProductId" class="form-control my-5">
+                @foreach(var item in @ViewBag.UnusedProducts)
                 {
-                    <option value="@item.CatagoryId">@item.Name</option>
+                    <option value="@item.ProductId">@item.Name</option>
                 }
             </select>
         </div>
         <button type="submit" class="btn btn-success">Add</button>
     </form>
+
+    
 </body>
 </html>

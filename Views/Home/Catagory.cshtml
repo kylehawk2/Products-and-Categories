@@ -34,7 +34,7 @@
             @foreach(Catagory catagory in @ViewBag.allcatagories)
             {
                 <tr>
-                    <td>@catagory.Name</td>
+                    <td><a asp-controller="Home" asp-action="ShowCatagory" asp-route-CatagoryId="@catagory.CatagoryId">@catagory.Name</a></td>
                 </tr>
             }
         </tbody>

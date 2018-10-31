@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Products_and_Catagories.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Products_and_Catagories.Controllers
 {
@@ -32,17 +33,41 @@ namespace Products_and_Catagories.Controllers
             ViewBag.allcatagories = AllCatagories;
             return View();
         }
-
-        public IActionResult Contact()
+        [HttpGet]
+        [Route("/Product/{productId}")]
+        public IActionResult ShowProduct(int productId)
         {
-            ViewData["Message"] = "Your contact page.";
+            Product this_product = dbContext.Products.Include(a => a.Associations).ThenInclude(c => c.Catagories).FirstOrDefault(p => p.ProductId == productId);
+            if(this_product == null)
+                return RedirectToAction("Index");
+            
+            IEnumerable<Catagory> UsedCatagories = this_product.Associations.Select(a => a.Catagories);
+            // 
+            IEnumerable<Catagory> UnusedCatagories = dbContext.Catagories
+            // Including the Catagory Associations
+                .Include(a => a.Associations)
+                // Only include catagories whose associations have no productId that matches 'x' or productId for the view, wont be included in the result
+                .Where(c => c.Associations.All(a => a.ProductId != productId)); 
+            ViewBag.this_product = this_product;
+            ViewBag.UsedCatagories = UsedCatagories;
+            ViewBag.UnusedCatagories = UnusedCatagories;
 
-            return View();
+            return View("ShowProduct");
         }
-
-        public IActionResult Error()
+        [HttpGet]
+        [Route("/Catagory/{catagoryId}")]
+        public IActionResult ShowCatagory(int catagoryId)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            Catagory this_catagory = dbContext.Catagories.Include(a => a.Associations).ThenInclude(c => c.Products).FirstOrDefault(p => p.CatagoryId == catagoryId);
+            if(this_catagory == null)
+                return RedirectToAction("Index");
+            
+            IEnumerable<Product> UsedProducts = this_catagory.Associations.Select(a => a.Products);
+            IEnumerable<Product> UnusedProducts = dbContext.Products.Include(a => a.Associations).Where(b => b.Associations.All(c => c.CatagoryId != catagoryId));
+            ViewBag.this_catagory = this_catagory;
+            ViewBag.UsedProducts = UsedProducts;
+            ViewBag.UnusedProducts = UnusedProducts;
+            return View("ShowCatagory");
         }
     }
 }

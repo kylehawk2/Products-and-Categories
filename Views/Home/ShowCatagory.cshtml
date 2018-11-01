@@ -1,4 +1,4 @@
-
+@model Association
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,7 @@
     <form class="form-group" asp-action="" asp-controller="Home" method="POST">
         <div class="form-group">
             <select asp-for="ProductId" class="form-control my-5">
-                @foreach(var item in @ViewBag.UnusedProducts)
+                @foreach(var item in ViewBag.UnusedProducts)
                 {
                     <option value="@item.ProductId">@item.Name</option>
                 }

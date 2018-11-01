@@ -26,14 +26,6 @@ namespace Products_and_Catagories.Controllers
             return View();
         }
         [HttpGet]
-        [Route("/Catagory")]
-        public IActionResult Catagory()
-        {
-            List<Catagory> AllCatagories = dbContext.Catagories.ToList();
-            ViewBag.allcatagories = AllCatagories;
-            return View();
-        }
-        [HttpGet]
         [Route("/Product/{productId}")]
         public IActionResult ShowProduct(int productId)
         {
@@ -54,6 +46,46 @@ namespace Products_and_Catagories.Controllers
 
             return View("ShowProduct");
         }
+        [HttpPost]
+        [Route("/")]
+        public IActionResult CreateProduct(Product product)
+        {
+            if(ModelState.IsValid)
+            {
+                dbContext.Add(product);
+                dbContext.SaveChanges();
+                return RedirectToAction("CreateProduct");
+            }
+            return View("Index");
+        }
+        [HttpPost]
+        [Route("/Products/{productId}")]
+        
+        public IActionResult UpdateProduct(int productId, int catagoryId)
+        {
+            Product this_product = dbContext.Products.Include(a => a.Associations).ThenInclude(p => p.Products).FirstOrDefault(c => c.ProductId == productId);
+            Boolean tf = this_product.Associations.Any(a => a.CatagoryId == catagoryId);
+            if(!tf)
+            {
+                Association connection = new Association()
+                {
+                    CatagoryId = catagoryId,
+                    ProductId = productId
+                };
+                this_product.Associations.Add(connection);
+                dbContext.SaveChanges();
+                return RedirectToAction("ShowProduct", new {productId = productId});
+            }
+            return View("Index", new {productId = productId});
+        }
+        [HttpGet]
+        [Route("/Catagory")]
+        public IActionResult Catagory()
+        {
+            List<Catagory> AllCatagories = dbContext.Catagories.ToList();
+            ViewBag.allcatagories = AllCatagories;
+            return View();
+        }
         [HttpGet]
         [Route("/Catagory/{catagoryId}")]
         public IActionResult ShowCatagory(int catagoryId)
@@ -68,6 +100,37 @@ namespace Products_and_Catagories.Controllers
             ViewBag.UsedProducts = UsedProducts;
             ViewBag.UnusedProducts = UnusedProducts;
             return View("ShowCatagory");
+        }
+        [HttpPost]
+        [Route("/Catagory")]
+        public IActionResult CreateCatagory(Catagory catagory)
+        {
+            if(ModelState.IsValid)
+            {
+                dbContext.Add(catagory);
+                dbContext.SaveChanges();
+                return RedirectToAction("CreateCatagory");
+            }
+            return View("Catagory");
+        }
+        [HttpPost]
+        [Route("/Catagory/{catagoryId}")]
+        public IActionResult UpdateCatagory(int catagoryId, int productId)
+        {
+            Catagory this_catagory = dbContext.Catagories.Include(a => a.Associations).FirstOrDefault(c => c.CatagoryId == catagoryId);
+            Boolean tf = this_catagory.Associations.Any(a => a.ProductId == productId);
+            if(!tf)
+            {
+                Association connection = new Association()
+                {
+                    CatagoryId = catagoryId,
+                    ProductId = productId
+                };
+                this_catagory.Associations.Add(connection);
+                dbContext.SaveChanges();
+                return RedirectToAction("Catagory", new {catagoryId = catagoryId});
+            }
+            return View("Catagory", new {catagoryId = catagoryId});
         }
     }
 }
